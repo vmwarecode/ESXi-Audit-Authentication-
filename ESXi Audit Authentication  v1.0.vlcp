@@ -1,0 +1,448 @@
+{
+  "name":"ESXi Audit Authentication",
+  "namespace":"com.vmware.auditesxi",
+  "contentPackId":"com.vmware.auditesxi",
+  "framework":"#9c4",
+  "version":"2.4",
+  "extractedFields":[ {
+    "displayName":"authentication_user_failed",
+    "preContext":"user ",
+    "postContext":" failed",
+    "regexValue":"\\w+",
+    "internalName":"ibademc7mnxw2ltwnv3wc4tffzqxkzdjorsxg6djmf2xi2dfnz2gsy3boruw63s7ovzwk4s7mzqws3dfmq000000",
+    "constraints":null,
+    "info":null
+  }, {
+    "displayName":"authentication_user_succeeded",
+    "preContext":"user ",
+    "postContext":" succeeded",
+    "regexValue":"\\w+",
+    "internalName":"ibademc7mnxw2ltwnv3wc4tffzqxkzdjorsxg6djmf2xi2dfnz2gsy3boruw63s7ovzwk4s7on2wgy3fmvsgkza0",
+    "constraints":null,
+    "info":null
+  }, {
+    "displayName":"dcui_authentication_method",
+    "preContext":"local ",
+    "postContext":": Authentication",
+    "regexValue":"\\w+",
+    "internalName":"ibademc7mnxw2ltwnv3wc4tffzqxkzdjorsxg6djmrrxk2k7mf2xi2dfnz2gsy3boruw63s7nvsxi2dpmq000000",
+    "constraints":null,
+    "info":null
+  }, {
+    "displayName":"dcui_user",
+    "preContext":"DCUI : User ",
+    "postContext":" logged",
+    "regexValue":"\\w+",
+    "internalName":"ibademc7mnxw2ltwnv3wc4tffzqxkzdjorsxg6djmrrxk2k7ovzwk4q0",
+    "constraints":null,
+    "info":null
+  }, {
+    "displayName":"linux_session_to",
+    "preContext":"session (opened|closed) for user ",
+    "postContext":"",
+    "regexValue":"\\S+",
+    "internalName":"ibademc7mnxw2ltwnv3wc4tffzqxkzdjorsxg6djnruw45lyl5zwk43tnfxw4x3un4000000",
+    "constraints":null,
+    "info":null
+  }, {
+    "displayName":"remote_host",
+    "preContext":"rhost=",
+    "postContext":"",
+    "regexValue":"\\S+",
+    "internalName":"ibademc7mnxw2ltwnv3wc4tffzqxkzdjorsxg6djojsw233umvpwq33toq000000",
+    "constraints":null,
+    "info":null
+  }, {
+    "displayName":"session_opened_by",
+    "preContext":"user ",
+    "postContext":" by",
+    "regexValue":"\\w+",
+    "internalName":"ibademc7mnxw2ltwnv3wc4tffzqxkzdjorsxg6djonsxg43jn5xf633qmvxgkzc7mj4q0000",
+    "constraints":null,
+    "info":null
+  }, {
+    "displayName":"user_level_corrector",
+    "preContext":"local ",
+    "postContext":":  \\[UserLevelCorrelator",
+    "regexValue":"\\w+",
+    "internalName":"ibademc7mnxw2ltwnv3wc4tffzqxkzdjorsxg6djovzwk4s7nrsxmzlml5rw64tsmvrxi33s",
+    "constraints":null,
+    "info":null
+  }, {
+    "displayName":"user_logged",
+    "preContext":"User ",
+    "postContext":" logged",
+    "regexValue":"\\w+",
+    "internalName":"ibademc7mnxw2ltwnv3wc4tffzqxkzdjorsxg6djovzwk4s7nrxwoz3fmq000000",
+    "constraints":null,
+    "info":null
+  } ],
+  "queries":[ ],
+  "alerts":[ {
+    "name":"SSH User Authentication Failure",
+    "info":"This alert shows tentatively to access the hosts with wrong credentials. This alert is configured to be sent if two tentatives were made within 5 minutes.",
+    "alertType":"RATE_BASED",
+    "chartQuery":"{\"query\":\"Authentication failure\",\"startTimeMillis\":1545420818828,\"endTimeMillis\":1545421136707,\"piqlFunctionGroups\":[{\"functions\":[{\"label\":\"Count\",\"value\":\"COUNT\",\"requiresField\":false,\"numericOnly\":false}],\"field\":null}],\"dateFilterPreset\":\"CUSTOM\",\"shouldGroupByTime\":false,\"eventSortOrder\":\"DESC\",\"summarySortOrder\":\"DESC\",\"compareQueryOrderBy\":\"TREND\",\"compareQuerySortOrder\":\"DESC\",\"compareQueryOptions\":null,\"messageViewType\":\"EVENTS\",\"constraintToggle\":\"ALL\",\"piqlFunction\":{\"label\":\"Count\",\"value\":\"COUNT\",\"requiresField\":false,\"numericOnly\":false},\"piqlFunctionField\":null,\"fieldConstraints\":[],\"supplementalConstraints\":[],\"groupByFields\":[],\"extractedFields\":[]}",
+    "messageQuery":null,
+    "hitCount":2.0,
+    "hitOperator":"GREATER_THAN",
+    "searchPeriod":300000,
+    "searchInterval":60000
+  }, {
+    "name":"DCUI User access failed",
+    "alertType":"RATE_BASED",
+    "chartQuery":"{\"query\":\"dcui.login.failed\",\"startTimeMillis\":1545417755281,\"endTimeMillis\":1545421373186,\"piqlFunctionGroups\":[{\"functions\":[{\"label\":\"Count\",\"value\":\"COUNT\",\"requiresField\":false,\"numericOnly\":false}],\"field\":null}],\"dateFilterPreset\":\"CUSTOM\",\"shouldGroupByTime\":false,\"eventSortOrder\":\"DESC\",\"summarySortOrder\":\"DESC\",\"compareQueryOrderBy\":\"TREND\",\"compareQuerySortOrder\":\"DESC\",\"compareQueryOptions\":null,\"messageViewType\":\"EVENTS\",\"constraintToggle\":\"ALL\",\"piqlFunction\":{\"label\":\"Count\",\"value\":\"COUNT\",\"requiresField\":false,\"numericOnly\":false},\"piqlFunctionField\":null,\"fieldConstraints\":[{\"internalName\":\"ibademc7mnxw2ltwnv3wc4tffzqxkzdjorsxg6djmf2xi2dfnz2gsy3boruw63s7ovzwk4s7mzqws3dfmq000000\",\"operator\":\"EXISTS\"},{\"internalName\":\"ibademc7mnxw2ltwnv3wc4tffzqxkzdjorsxg6djovzwk4s7nrsxmzlml5rw64tsmvrxi33s\",\"operator\":\"CONTAINS\",\"value\":\"vobd\"}],\"supplementalConstraints\":[],\"groupByFields\":[],\"extractedFields\":[{\"displayName\":\"authentication_user_failed\",\"preContext\":\"user \",\"postContext\":\" failed\",\"regexValue\":\"\\\\w+\",\"internalName\":\"ibademc7mnxw2ltwnv3wc4tffzqxkzdjorsxg6djmf2xi2dfnz2gsy3boruw63s7ovzwk4s7mzqws3dfmq000000\",\"constraints\":null},{\"displayName\":\"user_level_corrector\",\"preContext\":\"local \",\"postContext\":\":  \\\\[UserLevelCorrelator\",\"regexValue\":\"\\\\w+\",\"internalName\":\"ibademc7mnxw2ltwnv3wc4tffzqxkzdjorsxg6djovzwk4s7nrsxmzlml5rw64tsmvrxi33s\",\"constraints\":null}]}",
+    "messageQuery":"",
+    "hitCount":2.0,
+    "hitOperator":"GREATER_THAN",
+    "searchPeriod":300000,
+    "searchInterval":60000
+  } ],
+  "dashboardSections":[ {
+    "views":[ {
+      "name":"ESXI User Access Audit-DCUI",
+      "constraints":[ ],
+      "rows":[ {
+        "widgets":[ {
+          "name":"Hosts Accessed",
+          "info":"",
+          "chartType":null,
+          "chartOptions":"{\"logaxis\":false,\"pielabelstyle\":\"legend\",\"piepercentage\":false,\"piestyle\":\"normal\"}",
+          "widgetType":"chart",
+          "chartQuery":"{\"query\":\"\",\"startTimeMillis\":1545403269226,\"endTimeMillis\":1545406886608,\"piqlFunctionGroups\":[{\"functions\":[{\"label\":\"Count\",\"value\":\"COUNT\",\"requiresField\":false,\"numericOnly\":false}],\"field\":null}],\"dateFilterPreset\":\"CUSTOM\",\"shouldGroupByTime\":false,\"eventSortOrder\":\"DESC\",\"summarySortOrder\":\"DESC\",\"compareQueryOrderBy\":\"TREND\",\"compareQuerySortOrder\":\"DESC\",\"compareQueryOptions\":null,\"messageViewType\":\"EVENTS\",\"constraintToggle\":\"ALL\",\"piqlFunction\":{\"label\":\"Count\",\"value\":\"COUNT\",\"requiresField\":false,\"numericOnly\":false},\"piqlFunctionField\":null,\"fieldConstraints\":[{\"internalName\":\"ibademc7mnxw2ltwnv3wc4tffzqxkzdjorsxg6djovzwk4s7nrxwoz3fmq000000\",\"operator\":\"EXISTS\"}],\"supplementalConstraints\":[],\"groupByFields\":[{\"displayName\":\"hostname\",\"internalName\":\"hostname\",\"displayNamespace\":null,\"numericGroupByType\":\"EACH_VALUE\",\"numericGroupByValue\":null}],\"extractedFields\":[{\"displayName\":\"user_logged\",\"preContext\":\"User \",\"postContext\":\" logged\",\"regexValue\":\"\\\\w+\",\"internalName\":\"ibademc7mnxw2ltwnv3wc4tffzqxkzdjorsxg6djovzwk4s7nrxwoz3fmq000000\",\"constraints\":null}]}",
+          "messageQuery":""
+        }, {
+          "name":"Users Logged In/Out",
+          "info":"",
+          "chartType":null,
+          "chartOptions":"{\"logaxis\":false,\"pielabelstyle\":\"legend\",\"piepercentage\":false,\"piestyle\":\"normal\"}",
+          "widgetType":"chart",
+          "chartQuery":"{\"query\":\"\",\"startTimeMillis\":1545403968381,\"endTimeMillis\":1545407581109,\"piqlFunctionGroups\":[{\"functions\":[{\"label\":\"Count\",\"value\":\"COUNT\",\"requiresField\":false,\"numericOnly\":false}],\"field\":null}],\"dateFilterPreset\":\"CUSTOM\",\"shouldGroupByTime\":false,\"eventSortOrder\":\"DESC\",\"summarySortOrder\":\"DESC\",\"compareQueryOrderBy\":\"TREND\",\"compareQuerySortOrder\":\"DESC\",\"compareQueryOptions\":null,\"messageViewType\":\"EVENTS\",\"constraintToggle\":\"ALL\",\"piqlFunction\":{\"label\":\"Count\",\"value\":\"COUNT\",\"requiresField\":false,\"numericOnly\":false},\"piqlFunctionField\":null,\"fieldConstraints\":[{\"internalName\":\"ibademc7mnxw2ltwnv3wc4tffzqxkzdjorsxg6djovzwk4s7nrxwoz3fmq000000\",\"operator\":\"EXISTS\"}],\"supplementalConstraints\":[],\"groupByFields\":[{\"displayName\":\"user_logged\",\"internalName\":\"ibademc7mnxw2ltwnv3wc4tffzqxkzdjorsxg6djovzwk4s7nrxwoz3fmq000000\",\"displayNamespace\":\"Unknown\",\"numericGroupByType\":\"EACH_VALUE\",\"numericGroupByValue\":null}],\"extractedFields\":[{\"displayName\":\"user_logged\",\"preContext\":\"User \",\"postContext\":\" logged\",\"regexValue\":\"\\\\w+\",\"internalName\":\"ibademc7mnxw2ltwnv3wc4tffzqxkzdjorsxg6djovzwk4s7nrxwoz3fmq000000\",\"constraints\":null}]}",
+          "messageQuery":""
+        } ]
+      }, {
+        "widgets":[ {
+          "name":"DCUI User Access",
+          "info":"",
+          "gridWidth":"1",
+          "chartType":null,
+          "chartOptions":null,
+          "widgetType":"fieldTable",
+          "chartQuery":"{\"query\":\"\",\"startTimeMillis\":1545404204147,\"endTimeMillis\":1545407822608,\"piqlFunctionGroups\":[{\"functions\":[{\"label\":\"Count\",\"value\":\"COUNT\",\"requiresField\":false,\"numericOnly\":false}],\"field\":null}],\"dateFilterPreset\":\"CUSTOM\",\"shouldGroupByTime\":false,\"eventSortOrder\":\"DESC\",\"summarySortOrder\":\"DESC\",\"compareQueryOrderBy\":\"TREND\",\"compareQuerySortOrder\":\"DESC\",\"compareQueryOptions\":null,\"messageViewType\":\"EVENTS\",\"constraintToggle\":\"ALL\",\"piqlFunction\":{\"label\":\"Count\",\"value\":\"COUNT\",\"requiresField\":false,\"numericOnly\":false},\"piqlFunctionField\":null,\"fieldConstraints\":[{\"internalName\":\"ibademc7mnxw2ltwnv3wc4tffzqxkzdjorsxg6djovzwk4s7nrxwoz3fmq000000\",\"operator\":\"EXISTS\"}],\"supplementalConstraints\":[],\"groupByFields\":[{\"displayName\":\"hostname\",\"internalName\":\"hostname\",\"displayNamespace\":null,\"numericGroupByType\":\"EACH_VALUE\",\"numericGroupByValue\":null}],\"extractedFields\":[{\"displayName\":\"user_logged\",\"preContext\":\"User \",\"postContext\":\" logged\",\"regexValue\":\"\\\\w+\",\"internalName\":\"ibademc7mnxw2ltwnv3wc4tffzqxkzdjorsxg6djovzwk4s7nrxwoz3fmq000000\",\"constraints\":null}]}",
+          "messageQuery":"",
+          "columns":[ {
+            "internalName":"__li_timestamp_col",
+            "displayName":"__li_timestamp_col",
+            "displayNamespace":null
+          }, {
+            "internalName":"__li_msg_col",
+            "displayName":"__li_msg_col",
+            "displayNamespace":null
+          }, {
+            "internalName":"vmw_vcenter",
+            "displayName":"vmw_vcenter",
+            "displayNamespace":null
+          }, {
+            "internalName":"vmw_object_id",
+            "displayName":"vmw_object_id",
+            "displayNamespace":null
+          }, {
+            "internalName":"vmw_datacenter",
+            "displayName":"vmw_datacenter",
+            "displayNamespace":null
+          }, {
+            "internalName":"vmw_cluster",
+            "displayName":"vmw_cluster",
+            "displayNamespace":null
+          }, {
+            "internalName":"ibademc7mnxw2ltwnv3wc4tffzqxkzdjorsxg6djovzwk4s7nrxwoz3fmq000000",
+            "displayName":"user_logged",
+            "displayNamespace":"Unknown"
+          }, {
+            "internalName":"__li_source_path",
+            "displayName":"source",
+            "displayNamespace":null
+          }, {
+            "internalName":"hostname",
+            "displayName":"hostname",
+            "displayNamespace":null
+          }, {
+            "internalName":"appname",
+            "displayName":"appname",
+            "displayNamespace":null
+          } ]
+        } ]
+      }, {
+        "widgets":[ {
+          "name":"DCUI Authentication Succeeded",
+          "info":"",
+          "chartType":null,
+          "chartOptions":"{\"fourranges\":{\"ranges\":[\"\",\"\",\"\",\"\"]}}",
+          "widgetType":"chart",
+          "chartQuery":"{\"query\":\"authentication of user\",\"startTimeMillis\":1545404450688,\"endTimeMillis\":1545408068772,\"piqlFunctionGroups\":[{\"functions\":[{\"label\":\"Count\",\"value\":\"COUNT\",\"requiresField\":false,\"numericOnly\":false}],\"field\":null}],\"dateFilterPreset\":\"CUSTOM\",\"shouldGroupByTime\":false,\"eventSortOrder\":\"DESC\",\"summarySortOrder\":\"DESC\",\"compareQueryOrderBy\":\"TREND\",\"compareQuerySortOrder\":\"DESC\",\"compareQueryOptions\":null,\"messageViewType\":\"EVENTS\",\"constraintToggle\":\"ALL\",\"piqlFunction\":{\"label\":\"Count\",\"value\":\"COUNT\",\"requiresField\":false,\"numericOnly\":false},\"piqlFunctionField\":null,\"fieldConstraints\":[{\"internalName\":\"ibademc7mnxw2ltwnv3wc4tffzqxkzdjorsxg6djmrrxk2k7mf2xi2dfnz2gsy3boruw63s7nvsxi2dpmq000000\",\"operator\":\"CONTAINS\",\"value\":\"dcui\"},{\"internalName\":\"ibademc7mnxw2ltwnv3wc4tffzqxkzdjorsxg6djmf2xi2dfnz2gsy3boruw63s7ovzwk4s7on2wgy3fmvsgkza0\",\"operator\":\"EXISTS\"}],\"supplementalConstraints\":[],\"groupByFields\":[],\"extractedFields\":[{\"displayName\":\"authentication_user_succeeded\",\"preContext\":\"user \",\"postContext\":\" succeeded\",\"regexValue\":\"\\\\w+\",\"internalName\":\"ibademc7mnxw2ltwnv3wc4tffzqxkzdjorsxg6djmf2xi2dfnz2gsy3boruw63s7ovzwk4s7on2wgy3fmvsgkza0\",\"constraints\":null},{\"displayName\":\"dcui_authentication_method\",\"preContext\":\"local \",\"postContext\":\": Authentication\",\"regexValue\":\"\\\\w+\",\"internalName\":\"ibademc7mnxw2ltwnv3wc4tffzqxkzdjorsxg6djmrrxk2k7mf2xi2dfnz2gsy3boruw63s7nvsxi2dpmq000000\",\"constraints\":null}]}",
+          "messageQuery":""
+        }, {
+          "name":"DCUI Authentication  succeeded",
+          "info":"",
+          "chartType":null,
+          "chartOptions":null,
+          "widgetType":"fieldTable",
+          "chartQuery":"{\"query\":\"authentication of user\",\"startTimeMillis\":1545240435006,\"endTimeMillis\":1545413253242,\"piqlFunctionGroups\":[{\"functions\":[{\"label\":\"Count\",\"value\":\"COUNT\",\"requiresField\":false,\"numericOnly\":false}],\"field\":null}],\"dateFilterPreset\":\"CUSTOM\",\"shouldGroupByTime\":false,\"eventSortOrder\":\"DESC\",\"summarySortOrder\":\"DESC\",\"compareQueryOrderBy\":\"TREND\",\"compareQuerySortOrder\":\"DESC\",\"compareQueryOptions\":null,\"messageViewType\":\"EVENTS\",\"constraintToggle\":\"ALL\",\"piqlFunction\":{\"label\":\"Count\",\"value\":\"COUNT\",\"requiresField\":false,\"numericOnly\":false},\"piqlFunctionField\":null,\"fieldConstraints\":[{\"internalName\":\"ibademc7mnxw2ltwnv3wc4tffzqxkzdjorsxg6djmrrxk2k7mf2xi2dfnz2gsy3boruw63s7nvsxi2dpmq000000\",\"operator\":\"CONTAINS\",\"value\":\"dcui\"},{\"internalName\":\"ibademc7mnxw2ltwnv3wc4tffzqxkzdjorsxg6djmf2xi2dfnz2gsy3boruw63s7ovzwk4s7on2wgy3fmvsgkza0\",\"operator\":\"EXISTS\"}],\"supplementalConstraints\":[],\"groupByFields\":[],\"extractedFields\":[{\"displayName\":\"authentication_user_succeeded\",\"preContext\":\"user \",\"postContext\":\" succeeded\",\"regexValue\":\"\\\\w+\",\"internalName\":\"ibademc7mnxw2ltwnv3wc4tffzqxkzdjorsxg6djmf2xi2dfnz2gsy3boruw63s7ovzwk4s7on2wgy3fmvsgkza0\",\"constraints\":null},{\"displayName\":\"dcui_authentication_method\",\"preContext\":\"local \",\"postContext\":\": Authentication\",\"regexValue\":\"\\\\w+\",\"internalName\":\"ibademc7mnxw2ltwnv3wc4tffzqxkzdjorsxg6djmrrxk2k7mf2xi2dfnz2gsy3boruw63s7nvsxi2dpmq000000\",\"constraints\":null}]}",
+          "messageQuery":"",
+          "columns":[ {
+            "internalName":"__li_timestamp_col",
+            "displayName":"__li_timestamp_col",
+            "displayNamespace":null
+          }, {
+            "internalName":"__li_msg_col",
+            "displayName":"__li_msg_col",
+            "displayNamespace":null
+          }, {
+            "internalName":"vmw_vcenter",
+            "displayName":"vmw_vcenter",
+            "displayNamespace":null
+          }, {
+            "internalName":"vmw_datacenter",
+            "displayName":"vmw_datacenter",
+            "displayNamespace":null
+          }, {
+            "internalName":"vmw_cluster",
+            "displayName":"vmw_cluster",
+            "displayNamespace":null
+          }, {
+            "internalName":"__li_source_path",
+            "displayName":"source",
+            "displayNamespace":null
+          }, {
+            "internalName":"hostname",
+            "displayName":"hostname",
+            "displayNamespace":null
+          }, {
+            "internalName":"ibademc7mnxw2ltwnv3wc4tffzqxkzdjorsxg6djmf2xi2dfnz2gsy3boruw63s7ovzwk4s7on2wgy3fmvsgkza0",
+            "displayName":"authentication_user_succeeded",
+            "displayNamespace":"Unknown"
+          } ]
+        } ]
+      }, {
+        "widgets":[ {
+          "name":"DCUI Login Failed",
+          "info":"",
+          "chartType":null,
+          "chartOptions":"{\"fourranges\":{\"ranges\":[\"\",\"\",\"\",\"\"]}}",
+          "widgetType":"chart",
+          "chartQuery":"{\"query\":\"dcui.login.failed\",\"startTimeMillis\":1545415531583,\"endTimeMillis\":1545419144421,\"piqlFunctionGroups\":[{\"functions\":[{\"label\":\"Count\",\"value\":\"COUNT\",\"requiresField\":false,\"numericOnly\":false}],\"field\":null}],\"dateFilterPreset\":\"CUSTOM\",\"shouldGroupByTime\":false,\"eventSortOrder\":\"DESC\",\"summarySortOrder\":\"DESC\",\"compareQueryOrderBy\":\"TREND\",\"compareQuerySortOrder\":\"DESC\",\"compareQueryOptions\":null,\"messageViewType\":\"EVENTS\",\"constraintToggle\":\"ALL\",\"piqlFunction\":{\"label\":\"Count\",\"value\":\"COUNT\",\"requiresField\":false,\"numericOnly\":false},\"piqlFunctionField\":null,\"fieldConstraints\":[{\"internalName\":\"ibademc7mnxw2ltwnv3wc4tffzqxkzdjorsxg6djmf2xi2dfnz2gsy3boruw63s7ovzwk4s7mzqws3dfmq000000\",\"operator\":\"EXISTS\"},{\"internalName\":\"ibademc7mnxw2ltwnv3wc4tffzqxkzdjorsxg6djovzwk4s7nrsxmzlml5rw64tsmvrxi33s\",\"operator\":\"CONTAINS\",\"value\":\"vobd\"}],\"supplementalConstraints\":[],\"groupByFields\":[],\"extractedFields\":[{\"displayName\":\"authentication_user_failed\",\"preContext\":\"user \",\"postContext\":\" failed\",\"regexValue\":\"\\\\w+\",\"internalName\":\"ibademc7mnxw2ltwnv3wc4tffzqxkzdjorsxg6djmf2xi2dfnz2gsy3boruw63s7ovzwk4s7mzqws3dfmq000000\",\"constraints\":null},{\"displayName\":\"user_level_corrector\",\"preContext\":\"local \",\"postContext\":\":  \\\\[UserLevelCorrelator\",\"regexValue\":\"\\\\w+\",\"internalName\":\"ibademc7mnxw2ltwnv3wc4tffzqxkzdjorsxg6djovzwk4s7nrsxmzlml5rw64tsmvrxi33s\",\"constraints\":null}]}",
+          "messageQuery":""
+        }, {
+          "name":"DCUI Users Failed",
+          "info":"",
+          "chartType":null,
+          "chartOptions":null,
+          "widgetType":"fieldTable",
+          "chartQuery":"{\"query\":\"dcui.login.failed\",\"startTimeMillis\":1545415591130,\"endTimeMillis\":1545419200091,\"piqlFunctionGroups\":[{\"functions\":[{\"label\":\"Count\",\"value\":\"COUNT\",\"requiresField\":false,\"numericOnly\":false}],\"field\":null}],\"dateFilterPreset\":\"CUSTOM\",\"shouldGroupByTime\":false,\"eventSortOrder\":\"DESC\",\"summarySortOrder\":\"DESC\",\"compareQueryOrderBy\":\"TREND\",\"compareQuerySortOrder\":\"DESC\",\"compareQueryOptions\":null,\"messageViewType\":\"FIELD_TABLE\",\"constraintToggle\":\"ALL\",\"piqlFunction\":{\"label\":\"Count\",\"value\":\"COUNT\",\"requiresField\":false,\"numericOnly\":false},\"piqlFunctionField\":null,\"fieldConstraints\":[{\"internalName\":\"ibademc7mnxw2ltwnv3wc4tffzqxkzdjorsxg6djmf2xi2dfnz2gsy3boruw63s7ovzwk4s7mzqws3dfmq000000\",\"operator\":\"EXISTS\"},{\"internalName\":\"ibademc7mnxw2ltwnv3wc4tffzqxkzdjorsxg6djovzwk4s7nrsxmzlml5rw64tsmvrxi33s\",\"operator\":\"CONTAINS\",\"value\":\"vobd\"}],\"supplementalConstraints\":[],\"groupByFields\":[],\"extractedFields\":[{\"displayName\":\"authentication_user_failed\",\"preContext\":\"user \",\"postContext\":\" failed\",\"regexValue\":\"\\\\w+\",\"internalName\":\"ibademc7mnxw2ltwnv3wc4tffzqxkzdjorsxg6djmf2xi2dfnz2gsy3boruw63s7ovzwk4s7mzqws3dfmq000000\",\"constraints\":null},{\"displayName\":\"user_level_corrector\",\"preContext\":\"local \",\"postContext\":\":  \\\\[UserLevelCorrelator\",\"regexValue\":\"\\\\w+\",\"internalName\":\"ibademc7mnxw2ltwnv3wc4tffzqxkzdjorsxg6djovzwk4s7nrsxmzlml5rw64tsmvrxi33s\",\"constraints\":null}]}",
+          "messageQuery":"",
+          "columns":[ {
+            "internalName":"__li_timestamp_col",
+            "displayName":"__li_timestamp_col",
+            "displayNamespace":null
+          }, {
+            "internalName":"__li_msg_col",
+            "displayName":"__li_msg_col",
+            "displayNamespace":null
+          }, {
+            "internalName":"vmw_vcenter",
+            "displayName":"vmw_vcenter",
+            "displayNamespace":null
+          }, {
+            "internalName":"vmw_datacenter",
+            "displayName":"vmw_datacenter",
+            "displayNamespace":null
+          }, {
+            "internalName":"vmw_cluster",
+            "displayName":"vmw_cluster",
+            "displayNamespace":null
+          }, {
+            "internalName":"__li_source_path",
+            "displayName":"source",
+            "displayNamespace":null
+          }, {
+            "internalName":"hostname",
+            "displayName":"hostname",
+            "displayNamespace":null
+          }, {
+            "internalName":"ibademc7mnxw2ltwnv3wc4tffzqxkzdjorsxg6djmf2xi2dfnz2gsy3boruw63s7ovzwk4s7mzqws3dfmq000000",
+            "displayName":"authentication_user_failed",
+            "displayNamespace":"Unknown"
+          } ]
+        } ]
+      } ]
+    }, {
+      "name":"ESXI User Access Audit-SSH",
+      "constraints":[ ],
+      "rows":[ {
+        "widgets":[ {
+          "name":"Hosts Accessed",
+          "info":"",
+          "chartType":null,
+          "chartOptions":"{\"logaxis\":false,\"pielabelstyle\":\"legend\",\"piepercentage\":false,\"piestyle\":\"normal\"}",
+          "widgetType":"chart",
+          "chartQuery":"{\"query\":\"session opened for\",\"startTimeMillis\":1545414072350,\"endTimeMillis\":1545414372349,\"piqlFunctionGroups\":[{\"functions\":[{\"label\":\"Count\",\"value\":\"COUNT\",\"requiresField\":false,\"numericOnly\":false}],\"field\":null}],\"dateFilterPreset\":\"CUSTOM\",\"shouldGroupByTime\":false,\"eventSortOrder\":\"DESC\",\"summarySortOrder\":\"DESC\",\"compareQueryOrderBy\":\"TREND\",\"compareQuerySortOrder\":\"DESC\",\"compareQueryOptions\":null,\"messageViewType\":\"EVENTS\",\"constraintToggle\":\"ALL\",\"piqlFunction\":{\"label\":\"Count\",\"value\":\"COUNT\",\"requiresField\":false,\"numericOnly\":false},\"piqlFunctionField\":null,\"fieldConstraints\":[{\"internalName\":\"ibademc7mnxw2ltwnv3wc4tffzqxkzdjorsxg6djnruw45lyl5zwk43tnfxw4x3un4000000\",\"operator\":\"EXISTS\"}],\"supplementalConstraints\":[],\"groupByFields\":[{\"displayName\":\"hostname\",\"internalName\":\"hostname\",\"displayNamespace\":null,\"numericGroupByType\":\"EACH_VALUE\",\"numericGroupByValue\":null}],\"extractedFields\":[{\"displayName\":\"linux_session_to\",\"preContext\":\"session (opened|closed) for user \",\"postContext\":\"\",\"regexValue\":\"\\\\S+\",\"internalName\":\"ibademc7mnxw2ltwnv3wc4tffzqxkzdjorsxg6djnruw45lyl5zwk43tnfxw4x3un4000000\",\"constraints\":null}]}",
+          "messageQuery":""
+        }, {
+          "name":"Users Logged In",
+          "info":"",
+          "chartType":null,
+          "chartOptions":"{\"logaxis\":false,\"pielabelstyle\":\"legend\",\"piepercentage\":false,\"piestyle\":\"normal\"}",
+          "widgetType":"chart",
+          "chartQuery":"{\"query\":\"session opened for\",\"startTimeMillis\":1545414072350,\"endTimeMillis\":1545414372349,\"piqlFunctionGroups\":[{\"functions\":[{\"label\":\"Count\",\"value\":\"COUNT\",\"requiresField\":false,\"numericOnly\":false}],\"field\":null}],\"dateFilterPreset\":\"CUSTOM\",\"shouldGroupByTime\":false,\"eventSortOrder\":\"DESC\",\"summarySortOrder\":\"DESC\",\"compareQueryOrderBy\":\"TREND\",\"compareQuerySortOrder\":\"DESC\",\"compareQueryOptions\":null,\"messageViewType\":\"EVENTS\",\"constraintToggle\":\"ALL\",\"piqlFunction\":{\"label\":\"Count\",\"value\":\"COUNT\",\"requiresField\":false,\"numericOnly\":false},\"piqlFunctionField\":null,\"fieldConstraints\":[{\"internalName\":\"ibademc7mnxw2ltwnv3wc4tffzqxkzdjorsxg6djnruw45lyl5zwk43tnfxw4x3un4000000\",\"operator\":\"EXISTS\"}],\"supplementalConstraints\":[],\"groupByFields\":[{\"displayName\":\"linux_session_to\",\"internalName\":\"ibademc7mnxw2ltwnv3wc4tffzqxkzdjorsxg6djnruw45lyl5zwk43tnfxw4x3un4000000\",\"displayNamespace\":\"Unknown\",\"numericGroupByType\":\"EACH_VALUE\",\"numericGroupByValue\":null}],\"extractedFields\":[{\"displayName\":\"linux_session_to\",\"preContext\":\"session (opened|closed) for user \",\"postContext\":\"\",\"regexValue\":\"\\\\S+\",\"internalName\":\"ibademc7mnxw2ltwnv3wc4tffzqxkzdjorsxg6djnruw45lyl5zwk43tnfxw4x3un4000000\",\"constraints\":null}]}",
+          "messageQuery":""
+        } ]
+      }, {
+        "widgets":[ {
+          "name":"SSH User Access Granted",
+          "info":"",
+          "chartType":null,
+          "chartOptions":"{\"fourranges\":{\"ranges\":[\"\",\"\",\"\",\"\"]}}",
+          "widgetType":"chart",
+          "chartQuery":"{\"query\":\"session opened for\",\"startTimeMillis\":1545412714218,\"endTimeMillis\":1545416314217,\"piqlFunctionGroups\":[{\"functions\":[{\"label\":\"Count\",\"value\":\"COUNT\",\"requiresField\":false,\"numericOnly\":false}],\"field\":null}],\"dateFilterPreset\":\"CUSTOM\",\"shouldGroupByTime\":false,\"eventSortOrder\":\"DESC\",\"summarySortOrder\":\"DESC\",\"compareQueryOrderBy\":\"TREND\",\"compareQuerySortOrder\":\"DESC\",\"compareQueryOptions\":null,\"messageViewType\":\"EVENTS\",\"constraintToggle\":\"ALL\",\"piqlFunction\":{\"label\":\"Count\",\"value\":\"COUNT\",\"requiresField\":false,\"numericOnly\":false},\"piqlFunctionField\":null,\"fieldConstraints\":[{\"internalName\":\"ibademc7mnxw2ltwnv3wc4tffzqxkzdjorsxg6djnruw45lyl5zwk43tnfxw4x3un4000000\",\"operator\":\"EXISTS\"}],\"supplementalConstraints\":[],\"groupByFields\":[],\"extractedFields\":[{\"displayName\":\"linux_session_to\",\"preContext\":\"session (opened|closed) for user \",\"postContext\":\"\",\"regexValue\":\"\\\\S+\",\"internalName\":\"ibademc7mnxw2ltwnv3wc4tffzqxkzdjorsxg6djnruw45lyl5zwk43tnfxw4x3un4000000\",\"constraints\":null}]}",
+          "messageQuery":""
+        }, {
+          "name":"SSH User Access",
+          "info":"",
+          "chartType":null,
+          "chartOptions":null,
+          "widgetType":"fieldTable",
+          "chartQuery":"{\"query\":\"session opened for\",\"startTimeMillis\":1545414072350,\"endTimeMillis\":1545414372349,\"piqlFunctionGroups\":[{\"functions\":[{\"label\":\"Count\",\"value\":\"COUNT\",\"requiresField\":false,\"numericOnly\":false}],\"field\":null}],\"dateFilterPreset\":\"CUSTOM\",\"shouldGroupByTime\":false,\"eventSortOrder\":\"DESC\",\"summarySortOrder\":\"DESC\",\"compareQueryOrderBy\":\"TREND\",\"compareQuerySortOrder\":\"DESC\",\"compareQueryOptions\":null,\"messageViewType\":\"EVENTS\",\"constraintToggle\":\"ALL\",\"piqlFunction\":{\"label\":\"Count\",\"value\":\"COUNT\",\"requiresField\":false,\"numericOnly\":false},\"piqlFunctionField\":null,\"fieldConstraints\":[{\"internalName\":\"ibademc7mnxw2ltwnv3wc4tffzqxkzdjorsxg6djnruw45lyl5zwk43tnfxw4x3un4000000\",\"operator\":\"EXISTS\"}],\"supplementalConstraints\":[],\"groupByFields\":[{\"displayName\":\"hostname\",\"internalName\":\"hostname\",\"displayNamespace\":null,\"numericGroupByType\":\"EACH_VALUE\",\"numericGroupByValue\":null}],\"extractedFields\":[{\"displayName\":\"linux_session_to\",\"preContext\":\"session (opened|closed) for user \",\"postContext\":\"\",\"regexValue\":\"\\\\S+\",\"internalName\":\"ibademc7mnxw2ltwnv3wc4tffzqxkzdjorsxg6djnruw45lyl5zwk43tnfxw4x3un4000000\",\"constraints\":null}]}",
+          "messageQuery":"",
+          "columns":[ {
+            "internalName":"__li_timestamp_col",
+            "displayName":"__li_timestamp_col",
+            "displayNamespace":null
+          }, {
+            "internalName":"__li_msg_col",
+            "displayName":"__li_msg_col",
+            "displayNamespace":null
+          }, {
+            "internalName":"vmw_vcenter",
+            "displayName":"vmw_vcenter",
+            "displayNamespace":null
+          }, {
+            "internalName":"vmw_datacenter",
+            "displayName":"vmw_datacenter",
+            "displayNamespace":null
+          }, {
+            "internalName":"vmw_cluster",
+            "displayName":"vmw_cluster",
+            "displayNamespace":null
+          }, {
+            "internalName":"__li_source_path",
+            "displayName":"source",
+            "displayNamespace":null
+          }, {
+            "internalName":"procid",
+            "displayName":"procid",
+            "displayNamespace":null
+          }, {
+            "internalName":"ibademc7mnxw2ltwnv3wc4tffzqxkzdjorsxg6djnruw45lyl5zwk43tnfxw4x3un4000000",
+            "displayName":"linux_session_to",
+            "displayNamespace":"Unknown"
+          }, {
+            "internalName":"ibadsx3dn5ws43djnz2xq3djnz2xqx3tmvzxg2lpnzpxg5dborsq0000",
+            "displayName":"linux_session_state",
+            "displayNamespace":"Linux"
+          }, {
+            "internalName":"ibadsx3dn5ws43djnz2xq3djnz2xqx3tmvzxg2lpnzpwm4tpnu000000",
+            "displayName":"linux_session_from",
+            "displayNamespace":"Linux"
+          }, {
+            "internalName":"hostname",
+            "displayName":"hostname",
+            "displayNamespace":null
+          }, {
+            "internalName":"event_type",
+            "displayName":"event_type",
+            "displayNamespace":null
+          }, {
+            "internalName":"appname",
+            "displayName":"appname",
+            "displayNamespace":null
+          } ]
+        } ]
+      }, {
+        "widgets":[ {
+          "name":"SSH Login Failed",
+          "info":"",
+          "chartType":null,
+          "chartOptions":"{\"fourranges\":{\"ranges\":[\"\",\"\",\"\",\"\"]}}",
+          "widgetType":"chart",
+          "chartQuery":"{\"query\":\"Authentication failure\",\"startTimeMillis\":1545415516800,\"endTimeMillis\":1545415834793,\"piqlFunctionGroups\":[{\"functions\":[{\"label\":\"Count\",\"value\":\"COUNT\",\"requiresField\":false,\"numericOnly\":false}],\"field\":null}],\"dateFilterPreset\":\"CUSTOM\",\"shouldGroupByTime\":false,\"eventSortOrder\":\"DESC\",\"summarySortOrder\":\"DESC\",\"compareQueryOrderBy\":\"TREND\",\"compareQuerySortOrder\":\"DESC\",\"compareQueryOptions\":null,\"messageViewType\":\"EVENTS\",\"constraintToggle\":\"ALL\",\"piqlFunction\":{\"label\":\"Count\",\"value\":\"COUNT\",\"requiresField\":false,\"numericOnly\":false},\"piqlFunctionField\":null,\"fieldConstraints\":[],\"supplementalConstraints\":[],\"groupByFields\":[],\"extractedFields\":[]}",
+          "messageQuery":""
+        }, {
+          "name":"Remot Hosts Failing Access",
+          "info":"",
+          "chartType":null,
+          "chartOptions":"{\"logaxis\":false,\"pielabelstyle\":\"legend\",\"piepercentage\":false,\"piestyle\":\"normal\"}",
+          "widgetType":"chart",
+          "chartQuery":"{\"query\":\"Authentication failure\",\"startTimeMillis\":1545415653377,\"endTimeMillis\":1545415960231,\"piqlFunctionGroups\":[{\"functions\":[{\"label\":\"Count\",\"value\":\"COUNT\",\"requiresField\":false,\"numericOnly\":false}],\"field\":null}],\"dateFilterPreset\":\"CUSTOM\",\"shouldGroupByTime\":false,\"eventSortOrder\":\"DESC\",\"summarySortOrder\":\"DESC\",\"compareQueryOrderBy\":\"TREND\",\"compareQuerySortOrder\":\"DESC\",\"compareQueryOptions\":null,\"messageViewType\":\"EVENTS\",\"constraintToggle\":\"ALL\",\"piqlFunction\":{\"label\":\"Count\",\"value\":\"COUNT\",\"requiresField\":false,\"numericOnly\":false},\"piqlFunctionField\":null,\"fieldConstraints\":[],\"supplementalConstraints\":[],\"groupByFields\":[{\"displayName\":\"remote_host\",\"internalName\":\"ibademc7mnxw2ltwnv3wc4tffzqxkzdjorsxg6djojsw233umvpwq33toq000000\",\"displayNamespace\":\"Unknown\",\"numericGroupByType\":\"EACH_VALUE\",\"numericGroupByValue\":null}],\"extractedFields\":[{\"displayName\":\"remote_host\",\"preContext\":\"rhost=\",\"postContext\":\"\",\"regexValue\":\"\\\\S+\",\"internalName\":\"ibademc7mnxw2ltwnv3wc4tffzqxkzdjorsxg6djojsw233umvpwq33toq000000\",\"constraints\":null}]}",
+          "messageQuery":""
+        } ]
+      }, {
+        "widgets":[ {
+          "name":"SSH Login Failed",
+          "info":"",
+          "gridWidth":"1",
+          "chartType":null,
+          "chartOptions":null,
+          "widgetType":"fieldTable",
+          "chartQuery":"{\"query\":\"Authentication failure\",\"startTimeMillis\":1545415516800,\"endTimeMillis\":1545415834793,\"piqlFunctionGroups\":[{\"functions\":[{\"label\":\"Count\",\"value\":\"COUNT\",\"requiresField\":false,\"numericOnly\":false}],\"field\":null}],\"dateFilterPreset\":\"CUSTOM\",\"shouldGroupByTime\":false,\"eventSortOrder\":\"DESC\",\"summarySortOrder\":\"DESC\",\"compareQueryOrderBy\":\"TREND\",\"compareQuerySortOrder\":\"DESC\",\"compareQueryOptions\":null,\"messageViewType\":\"EVENTS\",\"constraintToggle\":\"ALL\",\"piqlFunction\":{\"label\":\"Count\",\"value\":\"COUNT\",\"requiresField\":false,\"numericOnly\":false},\"piqlFunctionField\":null,\"fieldConstraints\":[],\"supplementalConstraints\":[],\"groupByFields\":[],\"extractedFields\":[]}",
+          "messageQuery":"",
+          "columns":[ {
+            "internalName":"__li_timestamp_col",
+            "displayName":"__li_timestamp_col",
+            "displayNamespace":null
+          }, {
+            "internalName":"__li_msg_col",
+            "displayName":"__li_msg_col",
+            "displayNamespace":null
+          }, {
+            "internalName":"vmw_vcenter",
+            "displayName":"vmw_vcenter",
+            "displayNamespace":null
+          }, {
+            "internalName":"vmw_datacenter",
+            "displayName":"vmw_datacenter",
+            "displayNamespace":null
+          }, {
+            "internalName":"vmw_cluster",
+            "displayName":"vmw_cluster",
+            "displayNamespace":null
+          }, {
+            "internalName":"__li_source_path",
+            "displayName":"source",
+            "displayNamespace":null
+          }, {
+            "internalName":"procid",
+            "displayName":"procid",
+            "displayNamespace":null
+          }, {
+            "internalName":"hostname",
+            "displayName":"hostname",
+            "displayNamespace":null
+          }, {
+            "internalName":"appname",
+            "displayName":"appname",
+            "displayNamespace":null
+          } ]
+        } ]
+      } ]
+    } ],
+    "header":""
+  } ],
+  "aliasFields":[ ],
+  "aliasRules":[ ],
+  "author":"Luciano Gomes",
+  "url":"www.vmware.com",
+  "contentVersion":"1.0",
+  "info":"This content pack permit visibility what users are logging (or trying to log in) with success or not.&nbsp;",
+  "instructions":"To be able to use this content pack, follow the instructions below:<br><br>1) Configure the integration between Log Insight and vSphere (Native Integration)<br>2) Import this content pack and enable the two alerts that exist (DCUI and SSH failed tentatives).",
+  "icon":"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"
+}
